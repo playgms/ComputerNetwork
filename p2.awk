@@ -18,9 +18,9 @@ dst=$10;
 seq_no=$11;
 packet_id=$12;
 if(type=="tcp" && action=="r" && to=="3")
-tcp_sz+=pktsize
+ tcp_sz+=pktsize
 if(type=="cbr" && action=="r" && to=="3")
-cbr_sz+=pktsize
+ cbr_sz+=pktsize
 total_sz+=pktsize
 }
 END{
