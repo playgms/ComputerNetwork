@@ -4,7 +4,7 @@ $ns trace-all $tf
 
 set nf [open ex3.nam w]
 $ns namtrace-all $nf
-set cwind [open win3.tr w]
+set cwindfile [open win3.tr w]
 
 $ns color 1 Blue
 $ns color 2 Red
@@ -52,19 +52,19 @@ proc plotWindow {tcpSource file} {
    global ns
    set time 0.01
    set now [$ns now]
-   set cwind [tcpSource set cwind]
-   puts $file "$now $cwind"
+   set cwnd [tcpSource set cwnd_]
+   puts $file "$now $cwnd"
    $ns at [expr $now+$time ] "plotWindow $tcpSource $file"
-   
-  
-  $ns at 1.0 "plotWindow $tcp $cwind"
   }
+  
+$ns at 1.0 "plotWindow $tcp $cwindfile"
 
 proc finish {} {
-   global ns tf nf cwind 
+   global ns tf nf cwindfile 
    $ns flush-trace 
    close $tf
    close $nf
+   close $cwindfile
    exec nam ex3.nam &
    exec xgraph win3.tr &
    exit 0
